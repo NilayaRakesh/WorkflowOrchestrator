@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/workflow_orchestrator_app
+
+workflow-orchestration:
+  db: IN_MEMORY
+  workflow-definitions:
+    - name: CreateOrder
+      states:
+        - name: OrderReceived
+        - name: InventoryUpdated
+        - name: PaymentReceived
+        - name: OrderConfirmed
+        - name: Error
+      initialState: OrderReceived
+      transitions:
+        - from: OrderReceived
+          actionName: updateInventory
+          outcomesToNextState:
+            success: InventoryUpdated
+            fail: Error
+        - from: InventoryUpdated
+          actionName: confirmPayment
+          outcomesToNextState:
+            success: PaymentReceived
+            fail: Error
+        - from: PaymentReceived
+          actionName: confirmOrder
+          outcomesToNextState:
+            success: OrderConfirmed
+            fail: Error

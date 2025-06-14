@@ -1,9 +1,27 @@
-target/*
-libs/*
+# Maven build artifacts
+**/target/
+**/out/
 
+# Logs
+**/*.log
 
-### IntelliJ IDEA ###
-.idea
+# Class files
+**/*.class
+
+#IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Generated sources
+**/generated/
+**/build/generated/
+
+# Test reports
+**/surefire-reports/
+**/test-output/
